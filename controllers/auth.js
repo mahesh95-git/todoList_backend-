@@ -112,7 +112,7 @@ exports.sendResteMail = async (req, res, next) => {
     });
     res.status(201).json({ success: true, message: "check your email " });
   } catch (error) {
-    console.log(error);
+
     return next(new errorhandler(500, "Internal Server Error"));
   }
 };
@@ -123,7 +123,7 @@ exports.forgotPassword = async (req, res, next) => {
       .createHash("sha256")
       .update(req.params.token)
       .digest("hex");
-console.log(token)
+
     const User = await  user.findOne({
       resetToken: token,
       experyTokenDay:{$gt:Date.now()}
@@ -145,14 +145,14 @@ console.log(token)
     User.password = crypted;
     User.resetToken = undefined; 
     User.experyTokenDay = undefined; 
-    console.log(User)
+  
     await User.save();
 
     res
       .status(201)
       .json({ success: true, message: "your password successfully change" });
   } catch (error) {
-   console.log(error)
+
     return next(new errorhandler(500, "internal server error"));
   }
 };

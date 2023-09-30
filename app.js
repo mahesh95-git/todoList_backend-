@@ -3,7 +3,7 @@ const user = require("./routes/user")
 const passport=require("passport")
 const expressSession=require("express-session")
 const { auth } = require("./controllers/auth")
-
+const tasks=require("./routes/task")
 const local=require('passport-local').Strategy
 const app=express()
 app.use(expressSession({
@@ -22,5 +22,6 @@ passport.use(new local(auth) )
 app.use(express.json())
 
 app.use('/api/v1',user)
+app.use('/api/v1',tasks)
 
 module.exports=app
