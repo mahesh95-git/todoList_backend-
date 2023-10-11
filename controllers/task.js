@@ -9,7 +9,7 @@ exports.createNewtask = async (req, res, next) => {
       .status(201)
       .json({ success: true, message: "new task added successflly " });
   } catch (error) {
-    console.log(error);
+
     next(new errorhandler(500, "internal sever error please try again"));
   }
 };
